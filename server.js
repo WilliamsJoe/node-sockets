@@ -4,12 +4,13 @@ const path = require('path');
 
 const server = express();
 const PORT = process.env.PORT || 8080;
-const INDEX = path.join(__dirname, '/');
+const PUBLIC = path.join(__dirname, 'public');
 
-server.use((req, res) => res.sendFile(INDEX))
-	.listen(PORT, () => console.log(`Listening on ${PORT}`));
+server.use(express.static(PUBLIC));
 
-const wss = new SocketServer({server});
+server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new SocketServer({port: 8090});
 
 wss.on('connection', (ws) => {
 	console.log('Client Connected');

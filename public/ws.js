@@ -1,9 +1,10 @@
 console.log('Start App');
 
-// var HOST = location.origin.replace(/^http/, 'ws');
-// var ws = new WebSocket(HOST);
-// var el = document.getElementById('server-time');
+var HOST = location.origin.replace(/^http/, 'ws').replace(/8080/, '8090');
 
-// ws.onmessage = function (event) {
-// 	el.innerHTML =  'Server time: ' + event.data;
-// };
+var ws = new WebSocket(HOST);
+var el = document.getElementById('server-time');
+
+ws.onmessage = function (event) {
+	el.innerHTML =  'Server time: ' + event.data;
+};
